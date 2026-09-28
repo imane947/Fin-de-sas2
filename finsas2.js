@@ -24,6 +24,7 @@ const condidats = [{
         age : 26,
         electeurs : []
     },
+
 ]
 
 menu();
@@ -225,7 +226,7 @@ let supprimer = prompt("entre le cine de condidat que tu va supptimer :");
 for(let i =0 ; i<condidats.length; i++){
     if(condidats[i].CINE===supprimer){
         condidats.splice(i,1)
-     trouve = true;
+      trouve = true;
       console.log("Candidat supprimé.");
       break;
     
@@ -238,11 +239,8 @@ for(let i =0 ; i<condidats.length; i++){
 function Rechercherdescandidats(){
   console.log(`======Recherch un candidats :`);
 let  nomRecherche = prompt("Entrez le nom : ");
-
     let trouve = false;
-
     for(let i = 0; i < condidats.length; i++){
-
         if(condidats[i].nom === nomRecherche){
 
             console.log(`
@@ -257,63 +255,40 @@ let  nomRecherche = prompt("Entrez le nom : ");
             trouve = true;
         }
     }
-
     if(trouve === false){
         console.log("Candidat introuvable");
     }
-
-
-} 
-
+}
 function Statistiques(){
-
     if(condidats.length === 0){
         console.log("Il n'y a aucun candidat.");
         return;
     }
-
     console.log("Nombre total de candidats : " + condidats.length);
-
     let totalVote = 0;
-
     for(let i = 0; i < condidats.length; i++){
-
         totalVote = totalVote + condidats[i].electeurs.length;
     }
-
     console.log("Nombre total de votes : " + totalVote);
-
     let copie = [];
-
     for(let i = 0; i < condidats.length; i++){
         copie.push(condidats[i]);
     }
-
     for(let i = 0; i < copie.length - 1; i++){
-
         for(let j = 0; j < copie.length - 1 - i; j++){
-
             if(copie[j].electeurs.length < copie[j + 1].electeurs.length){
-
                 let reserve = copie[j];
-
                 copie[j] = copie[j + 1];
-
-                copie[j + 1] = reserve;
+                 copie[j + 1] = reserve;
             }
         }
     }
-
-    console.log("====== TOP 3 ======");
-
-    let limite = 3;
-
-    if(copie.length < 3){
+      console.log("====== TOP 3 ======");
+      let limite = 3;
+      if(copie.length < 3){
         limite = copie.length;
     }
-
     for(let i = 0; i < limite; i++){
-
         console.log(
             (i + 1) + ". " +
             copie[i].nom + " " +
@@ -321,45 +296,35 @@ function Statistiques(){
             " - Votes : " +
             copie[i].electeurs.length
         );
-    }
 
-    console.log("====== CANDIDATS PAR PARTI ======");
-
-    let partis = [];
-
-    for(let i = 0; i < condidats.length; i++){
-
-        let existe = false;
-
-        for(let j = 0; j < partis.length; j++){
-
-            if(partis[j] === condidats[i].partePolitique){
-
-                existe = true;
+    }  console.log("====== CANDIDATS PAR PARTI ======");
+         let partis = [];
+         for(let i = 0; i < condidats.length; i++){
+         let existe = false;
+          for(let j = 0; j < partis.length; j++){
+         if(partis[j] === condidats[i].partePolitique){
+          existe = true;
             }
         }
-
         if(existe === false){
-
-            partis.push(condidats[i].partePolitique);
+        partis.push(condidats[i].partePolitique);
         }
     }
-
     for(let i = 0; i < partis.length; i++){
+         let compteur = 0;
 
-        let compteur = 0;
-
-        for(let j = 0; j < condidats.length; j++){
-
-            if(condidats[j].partePolitique === partis[i]){
-
-                compteur++;
+         console.log(partis[i])
+         console.log("---------------")
+         for(let j = 0; j < condidats.length; j++){
+           if(condidats[j].partePolitique === partis[i]){
+             console.log(condidats[j])
+              compteur++;
             }
         }
-
         console.log(
-            partis[i] + " : " + compteur
+        "nombres: "  + compteur
         );
+        console.log("")
     }
 }
 
