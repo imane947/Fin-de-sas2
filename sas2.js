@@ -15,7 +15,7 @@ function menu(){
         5. Modifier les informations d'un candidat
         6. Supprimer un candidat  
         7.  Rechercher des candidats  
-        8. Statistiques de l'élection 
+        0. Statistiques de l'élection 
         `);
          let choix= Number(prompt("entrez un chouix "));
 
@@ -42,11 +42,9 @@ function menu(){
     case 7: Rechercherdescandidats();
              menu();
         break;
-    case 8:  Statistiques(); 
+    case 0: Statistiquesde(); 
           menu();
     break;
-    case 0 :
-           return;
     default:
         console.log("choix introuvable");  
         menu();        
@@ -64,22 +62,22 @@ function  Ajoutercondidate() {
             console.log(`
                 cin de condidat deja excuté !!!
                 ` );
-            return;
+            menu();
         };
         
     }
     let nom = prompt("entre le nom de condidat : ")
     let prenom = prompt("entre le prenom de condidat : ")
-    let partePolitique = prompt("entre la partiPolitique : ")
+    let partePolitic = prompt("entre la partiPolitique : ")
     let age = parseInt(prompt("entre age de condidat : "))
-    if (partePolitique === "") {
-        partePolitique = "Indépendant"
+    if (partePolitic === "") {
+        partePolitic = "Indépendant"
     }
     const condidat = {
         CINE : CINE,
         nom : nom,
         prenom : prenom,
-        partePolitique : partePolitique,
+        partePolitique : partePolitic,
         age : age,
         electeurs : []
     } 
@@ -99,55 +97,52 @@ function Afficherlalistedescandidats(){
         2.aficher pour le parti politique 
         3.aficher pour le nombre de vote 
          `);
-    let choix=Number(prompt("votre choix"));
+    let choix=prompt("votre choix");
         if(choix==1){
     console.log(`=======Afficher la liste des candidats======`);
-    for(let i=0;i<condidats.length;i++){
+    for(i=0;i<condidats.length;i++){
         console.log(`
             CINE    :  ${condidats[i].CINE}
             nom    :  ${condidats[i].nom}
-            partePolitique : ${condidats[i].partePolitique}
+            partePolitic : ${condidats[i].partePolitic}
             age : ${condidats[i].age}
-            voter : ${condidats[i].electeurs.length}
+
             `);
         }
-    }else if(choix==2){
+    }if(choix==2){
         let partiPolitique=prompt("entre le nom de partinpolitique : ")
-        for(let i=0;i<condidats.length;i++){
+        for(let i=0;i<condidats[i].length;i++){
             if(partiPolitique==condidats[i].partePolitique){
                console.log(`
             CINE    :  ${condidats[i].CINE}
             nom    :  ${condidats[i].nom}
-            partePolitique: ${condidats[i].partePolitique}
+            partePolitic : ${condidats[i].partePolitic}
             age : ${condidats[i].age}
-            voter : ${condidats[i].electeurs.length}
+
             `);
             }
         }
-    }else if (choix===3){
+    }if( choix===3 ){
         let reserve=0;
     for(let i =0 ; i<condidats.length-1;i++){
-        for(let j=0 ; j<condidats.length -1-i ;j++){
+        for(let j=0 ; j<condidats[i].electeurs.length -1-i ;j++){
             if(condidats[j].electeurs.length<condidats[j+1].electeurs.length){
-                let reserve = condidats[j];
-
-               condidats[j] = condidats[j+1];
-
-                  condidats[j+1] = reserve;
+                reserve=condidats[j].electeurs.length;
+                condidats[j].electeurs.length=condidats[j+1].electeurs.length
+                condidats[j+1].electeurs.length=reserve
             }
-        }}
-    for(let i=0;i<condidats.length;i++){
-            
+        }
+    }for(let i=0;i<condidats[i].length;i++){
+            if(partiPolitique==condidats[i].partePolitique){
                console.log(`
             CINE    :  ${condidats[i].CINE}
             nom    :  ${condidats[i].nom}
-            partePolitique : ${condidats[i].partePolitique}
+            partePolitic : ${condidats[i].partePolitic}
             age : ${condidats[i].age}
-            voter : ${condidats[i].electeurs.length}
+
             `);
-        
+            }
         }
-    }
 
     }else{
         console.log(" le choix invalide");
@@ -155,11 +150,11 @@ function Afficherlalistedescandidats(){
 
     
 }
-
+}
 function Voterpouruncandidat(){ 
 let cinelecteur = prompt("Entrez votre CIN : ");
 for(let i=0;i<condidats.length;i++){
-    for(let j=0;j<condidats[i].electeurs.length;j++){
+    for(let j=0;i<condidats[j].electeurs.length;i++){
     if(condidats[i].electeurs[j]===cinelecteur){
         console.log("le electour et deja vete ");
         return ;
@@ -184,8 +179,8 @@ function Modifierlesinformations(){
 for(let i=0;i<condidats.length;i++){
     if(cincondidat==condidats[i].CINE){
         trouv=true;
-        condidats[i].age=Number(prompt("entre nouvele age "));
-        condidats[i].partePolitique=prompt("entre nouvele partie politique ")
+        condidats[i].age=prompt("entre nouvele age ");
+        condidats[i].partePolitic=prompt("entre nouvele partie politique ")
         
     }
 }if(!trouv){
@@ -200,14 +195,9 @@ let supprimer = prompt("entre le cine de condidat que tu va supptimer :");
 for(let i =0 ; i<condidats.length; i++){
     if(condidats[i].CINE===supprimer){
         condidats.splice(i,1)
-     trouve = true;
-      console.log("Candidat supprimé.");
-      break;
-    
-}
-}
-       if(trouve === false){
-        console.log("Le CIN n'existe pas.");
+    }else{
+        console.log("le cine ne existe pas :");
+    }
 }
 }
 function Rechercherdescandidats(){
@@ -224,7 +214,7 @@ let  nomRecherche = prompt("Entrez le nom : ");
             CINE : ${condidats[i].CINE}
             Nom : ${condidats[i].nom}
             Prénom : ${condidats[i].prenom}
-            partePolitique: ${condidats[i].partePolitique}
+            Parti : ${condidats[i].partePolitique}
             Age : ${condidats[i].age}
             Nombre de votes : ${condidats[i].electeurs.length}
             `);
@@ -239,24 +229,23 @@ let  nomRecherche = prompt("Entrez le nom : ");
 
 
 } 
+function Statistiquesde(){
 
-function Statistiques(){
+    console.log("====== STATISTIQUES ======");
 
-    if(condidats.length === 0){
-        console.log("Il n'y a aucun candidat.");
-        return;
-    }
+    console.log("Nombre de candidats :", condidats.length);
 
-    console.log("Nombre total de candidats : " + condidats.length);
-
-    let totalVote = 0;
+    let total = 0;
 
     for(let i = 0; i < condidats.length; i++){
 
-        totalVote = totalVote + condidats[i].electeurs.length;
+        total = total + condidats[i].electeurs.length;
     }
 
-    console.log("Nombre total de votes : " + totalVote);
+    console.log("Nombre total de votes :", total);
+
+
+    console.log("====== TOP 3 ======");
 
     let copie = [];
 
@@ -266,20 +255,18 @@ function Statistiques(){
 
     for(let i = 0; i < copie.length - 1; i++){
 
-        for(let j = 0; j < copie.length - 1 - i; j++){
+        for(let j = 0; j < copie.length - 1; j++){
 
             if(copie[j].electeurs.length < copie[j + 1].electeurs.length){
 
-                let reserve = copie[j];
+                let temp = copie[j];
 
                 copie[j] = copie[j + 1];
 
-                copie[j + 1] = reserve;
+                copie[j + 1] = temp;
             }
         }
     }
-
-    console.log("====== TOP 3 ======");
 
     let limite = 3;
 
@@ -290,51 +277,10 @@ function Statistiques(){
     for(let i = 0; i < limite; i++){
 
         console.log(
-            (i + 1) + ". " +
-            copie[i].nom + " " +
-            copie[i].prenom +
-            " - Votes : " +
-            copie[i].electeurs.length
-        );
-    }
-
-    console.log("====== CANDIDATS PAR PARTI ======");
-
-    let partis = [];
-
-    for(let i = 0; i < condidats.length; i++){
-
-        let existe = false;
-
-        for(let j = 0; j < partis.length; j++){
-
-            if(partis[j] === condidats[i].partePolitique){
-
-                existe = true;
-            }
-        }
-
-        if(existe === false){
-
-            partis.push(condidats[i].partePolitique);
-        }
-    }
-
-    for(let i = 0; i < partis.length; i++){
-
-        let compteur = 0;
-
-        for(let j = 0; j < condidats.length; j++){
-
-            if(condidats[j].partePolitique === partis[i]){
-
-                compteur++;
-            }
-        }
-
-        console.log(
-            partis[i] + " : " + compteur
+            i + 1,
+            copie[i].nom,
+            copie[i].prenom,
+            "Votes :", copie[i].electeurs.length
         );
     }
 }
-
