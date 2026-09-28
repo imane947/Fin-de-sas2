@@ -225,15 +225,13 @@ function Supprimeruncandidat(){
 let supprimer = prompt("entre le cine de condidat que tu va supptimer :");
 for(let i =0 ; i<condidats.length; i++){
     if(condidats[i].CINE===supprimer){
-        condidats.splice(i,1)
-      trouve = true;
-      console.log("Candidat supprimé.");
-      break;
+        for(let j=i; j<condidats.length-1;j++){
+            condidats[j]=condidats[j+1]
+        }
+        condidats.length-=1
+        return
     
 }
-}
-       if(trouve === false){
-        console.log("Le CIN n'existe pas.");
 }
 }
 function Rechercherdescandidats(){
