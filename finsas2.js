@@ -62,7 +62,7 @@ function  Ajoutercondidate() {
             console.log(`
                 cin de condidat deja excuté !!!
                 ` );
-            menu();
+            return;
         };
         
     }
@@ -198,11 +198,14 @@ let supprimer = prompt("entre le cine de condidat que tu va supptimer :");
 for(let i =0 ; i<condidats.length; i++){
     if(condidats[i].CINE===supprimer){
         condidats.splice(i,1)
-        let trouve = true;
-        break;
-    }else{
-        console.log("le cine ne existe pas :");
-    }
+     trouve = true;
+      console.log("Candidat supprimé.");
+      break;
+    
+}
+}
+       if(trouve === false){
+        console.log("Le CIN n'existe pas.");
 }
 }
 function Rechercherdescandidats(){
@@ -234,42 +237,6 @@ let  nomRecherche = prompt("Entrez le nom : ");
 
 
 } 
-function Statistiqueselection(){
-    if(cont<=0){
-        console.log(`   il nya aucun candidat , ajoute les condidat;`);
-        return menu();  
-    }
-    let totalVote=0;
-    for(i=0;i<cont;i++){
-        totalVote+=totalElements(candidats[i].electeurs);
-    }
-    console.log(`
-        le nombre totale de candidat est       :  ${cont}
-        le nombre totale de electour qui vete  :  ${totalVote}
-        `);
-        
-    trierVote();
-    for(let i=0;i<3&&cont-i>0;i++){
-        console.log(`     les trois premiers partis
-                    cin    : ${candidats[i].cin}
-                    nom    : ${candidats[i].nom}
-                    prenom : ${candidats[i].prenom}
-                    partiPolitique: ${candidats[i].partiPolitique}
-                    age    : ${candidats[i].age}
-                    votes  : ${totalElements(candidats[i].electeurs)}
-                     _________________`);
-    }
-    let partePolitique={};
-    for(let cle of candidats){
-        if(partiPolitique[cle.partePolitique]){
-            partiPolitique[cle.partePolitique]+=totalElements(cle.electeurs);
-        }else{
-            partiPolitique[cle.partiPolitique]=totalElements(cle.electeurs);
-        }
-
-    }
-    console.log(partiPolitique);
-}
 
 function Statistiques(){
 
