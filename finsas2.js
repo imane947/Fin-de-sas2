@@ -263,11 +263,13 @@ function Statistiques(){
         return;
     }
     console.log("Nombre total de candidats : " + condidats.length);
+    
     let totalVote = 0;
     for(let i = 0; i < condidats.length; i++){
         totalVote = totalVote + condidats[i].electeurs.length;
     }
     console.log("Nombre total de votes : " + totalVote);
+    
     let copie = [];
     for(let i = 0; i < condidats.length; i++){
         copie.push(condidats[i]);
