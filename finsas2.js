@@ -1,6 +1,31 @@
 const prompt = require('prompt-sync')();
 
-const condidats = []
+const condidats = [{
+        CINE : "HH350578",
+        nom : "iman",
+        prenom : "RACHIDI",
+        partePolitique : "PJD",
+        age : 20,
+        electeurs : ["H123", "HH123", "j88" ]
+    },
+    {
+        CINE : "HH350570",
+        nom : "oussama",
+        prenom : "RACHIDI",
+        partePolitique : "PJD",
+        age : 21,
+        electeurs : ["H1234", "HH1235", "j888", "e777" ]
+    },
+    {
+        CINE : "HH350578",
+        nom : "Achraf",
+        prenom : "RACHIDI",
+        partePolitique : "PAM",
+        age : 26,
+        electeurs : []
+    },
+]
+
 menu();
 
 function menu(){
@@ -181,7 +206,7 @@ for(let i=0;i<condidats.length;i++){
 function Modifierlesinformations(){
     let trouv=false
     let cincondidat=prompt("entre le cin de condidat :")
-for(let i=0;i<condidats.length;i++){
+for(let i=0;i  <condidats.length;i++){
     if(cincondidat==condidats[i].CINE){
         trouv=true;
         condidats[i].age=Number(prompt("entre nouvele age "));
