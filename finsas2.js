@@ -232,7 +232,8 @@ for(let i =0 ; i<condidats.length; i++){
         return
     
 }
-}
+      }
+      console.log("Candidat introuvable !");
 }
 function Rechercherdescandidats(){
   console.log(`======Recherch un candidats :`);
